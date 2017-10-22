@@ -7,6 +7,15 @@ export default function({ dispatch }) {
       return next(action)
     }
 
-    console.log('we dont have a promise', action);
+    // Make sure the action's promise resolves
+    action.payload
+      .then(function(response) {
+        // take whatever the action contains and extend over it payload of response
+        // create a new action with the old type, but replace the promise with the response data
+        const newAction = { ...action, payload: response };
+
+        // take the new action and send it to the very top again and run this action through everything again
+        dispatch(newAction);
+      });
   };
 }
