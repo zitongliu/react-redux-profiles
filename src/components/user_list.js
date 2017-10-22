@@ -7,9 +7,9 @@ class UserList extends Component {
     this.props.fetchUsers();
   }
 
-  renderUser(user) {
+  renderUser(user, index) {
     return (
-      <div className="card card-block">
+      <div key={index} className="card card-block">
         <h4 className="card-title">{user.name}</h4>
         <p className="card-text">Cheese Factory</p>
         <a className="btn btn-primary">Email</a>
@@ -19,7 +19,7 @@ class UserList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="user-list">
         {this.props.users.map(this.renderUser)}
       </div>
     )
